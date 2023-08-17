@@ -1,1 +1,5 @@
-# SRAM-PUF-AUTH
+## Raw SRAM Memory Content Collection Module
+
+This module is dedicated to the collection of raw SRAM (Static Random-Access Memory) memory content.
+
+
