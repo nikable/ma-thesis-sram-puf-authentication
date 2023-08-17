@@ -5,7 +5,7 @@ import tflite_runtime.interpreter as tflite
 
 # Load TFLite model and allocate tensors.
 # EfficcientNet-Lite model
-interpreter = tflite.Interpreter(model_path="/home/pi1/tflite/model3/efficientnet/withhyperparam/model.tflite")
+interpreter = tflite.Interpreter(model_path="/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/efficientnet/noisy/model.tflite")
 # Custom model (converted from Keras API)
 #interpreter = tflite.Interpreter(model_path="model50.tflite")
 

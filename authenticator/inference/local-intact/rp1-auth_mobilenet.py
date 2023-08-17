@@ -2,7 +2,6 @@ import socket
 import time
 import os
 import model_inference as mi
-import argparse
 
 def server_program():
     # get the hostname/ip address
@@ -26,19 +25,6 @@ def server_program():
     
     # add a timeout
     server_socket.settimeout(150.0)   # in seconds  
-    
-    # parse labels/device list
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-    '-d',
-    '--devices',
-    default='../efficientnet/labels.txt',
-    help='list of enrolled devices')
-    args = parser.parse_args()
-    
-    with open(args.devices) as file:
-        devices = [line.rstrip() for line in file]
-    print(devices)
 
     # accept a new connection 
     conn, address = server_socket.accept()
@@ -49,8 +35,6 @@ def server_program():
     print(auth_req)
     board = auth_req.split()[-1]
     print("Board name:", board)
-    if board in devices:
-        print("Requested board is in the device list...")
 
     time.sleep(2)
     
@@ -77,9 +61,8 @@ def server_program():
     print("File received. model being executed..")
     time.sleep(2)
 
-    # calling efficientnet_lite model for classification
-    model = "/home/pi1/tflite/model3_v2/efficientnet/model.tflite"
-
+    ## calling MobileNetV2 for classification
+    model = "/home/pi1/tflite/model3_v2/mobilenet/v2/model.tflite"
     image = filename
     score, label = mi.classify_image(model,image)  
 

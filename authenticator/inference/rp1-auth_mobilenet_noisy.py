@@ -32,7 +32,7 @@ def server_program():
     parser.add_argument(
     '-d',
     '--devices',
-    default='../efficientnet/labels.txt',
+    default='../mobilenet/labels.txt',
     help='list of enrolled devices')
     args = parser.parse_args()
     
@@ -81,23 +81,23 @@ def server_program():
         print("File received. model being executed..")
         time.sleep(2)
 
-        # calling efficientnet_lite model for classification
-        #model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/efficientnet/model.tflite"
-
-        # calling efficientnet_lite model for classification
-        model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/efficientnet/local-intact/model.tflite"
+        # calling mobilenet model for classification
+        model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/mobilenet/noisy/model.tflite"
 
         image = filename
         score, label = mi.classify_image(model,image)  
 
         print("Image label detected:", label , "with confidence:", score*100, "%")
         
-        if (score*100 > 90 and label.lower() == board.lower()):
+        if(score*100 > 85 and label.lower() == board.lower()):
             print("Predicted label by model from board image is correct.. authentication successful :)")
             conn.send("Device authenticated".encode(ENCODING))
 
+        elif(score*100 < 85 and label.lower() == board.lower()):
+            print("Predicted label has low confidence score... authentication not successful!!")
+
         else:
-            print("Board name and predicted image label mismatch...authentication not successful!")
+            print("Board name and predicted image label mismatch...authentication not successful!!")
             conn.send("Device not authenticated".encode(ENCODING))
         
 

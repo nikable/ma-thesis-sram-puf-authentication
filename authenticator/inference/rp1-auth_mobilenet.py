@@ -2,6 +2,7 @@ import socket
 import time
 import os
 import model_inference as mi
+import argparse
 
 def server_program():
     # get the hostname/ip address
@@ -25,6 +26,19 @@ def server_program():
     
     # add a timeout
     server_socket.settimeout(150.0)   # in seconds  
+    
+    # parse labels/device list
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+    '-d',
+    '--devices',
+    default='../efficientnet/labels.txt',
+    help='list of enrolled devices')
+    args = parser.parse_args()
+    
+    with open(args.devices) as file:
+        devices = [line.rstrip() for line in file]
+    #print(devices)
 
     # accept a new connection 
     conn, address = server_socket.accept()
@@ -35,50 +49,57 @@ def server_program():
     print(auth_req)
     board = auth_req.split()[-1]
     print("Board name:", board)
-
-    time.sleep(2)
     
-    # file related stuff
-    conn.send("Please send the board image".encode(ENCODING))
-    received = conn.recv(BUFFER_SIZE).decode()
-    filename, filesize = received.split(SEPARATOR)
-    # remove absolute path if there is
-    filename = os.path.basename(filename)
-    # informing the recived file 
-    print("Receiving file:", filename)
-
+    if board not in devices:
+        print("Board is not present in the enrolled device list... Request rejected!!")
+        conn.close()  # close the connection
+        server_socket.close() # close the server socket
     
-    with open(filename, "wb") as file:
-        while True:
-            # read 1024 bytes from the socket (receive)
-            bytes_read = conn.recv(BUFFER_SIZE)
-            if not bytes_read:
-            # terminate file transmitting is done
-                break
-            # write to the file the bytes we just received
-            file.write(bytes_read)
+    if board in devices:
+        time.sleep(2)
+        
+        # file related stuff
+        conn.send("Please send the board image".encode(ENCODING))
+        received = conn.recv(BUFFER_SIZE).decode()
+        filename, filesize = received.split(SEPARATOR)
+        # remove absolute path if there is
+        filename = os.path.basename(filename)
+        # informing the recived file 
+        print("Receiving file:", filename)
 
-    print("File received. model being executed..")
-    time.sleep(2)
+        
+        with open(filename, "wb") as file:
+            while True:
+                # read 1024 bytes from the socket (receive)
+                bytes_read = conn.recv(BUFFER_SIZE)
+                if not bytes_read:
+                # terminate file transmitting is done
+                    break
+                # write to the file the bytes we just received
+                file.write(bytes_read)
 
-    ## calling MobileNetV2 for classification
-    model = "/home/pi1/tflite/model3_v2/mobilenet/v2/model.tflite"
-    image = filename
-    score, label = mi.classify_image(model,image)  
+        print("File received. model being executed..")
+        time.sleep(2)
 
-    print("Image label detected:", label , "with confidence:", score*100, "%")
-    
-    if(score*100 > 90 and label.lower() == board.lower()):
-        print("Predicted label by model from board image is correct.. authentication successful")
-        conn.send("Device authenticated".encode(ENCODING))
+        # calling mobilenet model for classification
+        model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/mobilenet/local-intact/model.tflite"
 
-    else:
-        print("Board name and predicted image label mismatch...authentication not successful!")
-        conn.send("Device not authenticated".encode(ENCODING))
-    
+        image = filename
+        score, label = mi.classify_image(model,image)  
 
-    conn.close()  # close the connection
-    server_socket.close() # close the server socket
+        print("Image label detected:", label , "with confidence:", score*100, "%")
+        
+        if(score*100 > 90 and label.lower() == board.lower()):
+            print("Predicted label by model from board image is correct.. authentication successful :) ")
+            conn.send("Device authenticated".encode(ENCODING))
+
+        else:
+            print("Board name and predicted image label mismatch...authentication not successful!")
+            conn.send("Device not authenticated".encode(ENCODING))
+        
+
+        conn.close()  # close the connection
+        server_socket.close() # close the server socket
 
 if __name__ == '__main__':
     server_program()
