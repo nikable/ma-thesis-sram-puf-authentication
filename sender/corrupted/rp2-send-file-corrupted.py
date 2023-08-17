@@ -16,36 +16,32 @@ def client_program():
     BUFFER_SIZE = 4096  # buffer size for data transmission
     
     ## file related data
-    
-    ## boards from which efficient-net lite model is trained
-    
-    #filename = "board002Acycle0068_rgbnoise.png"
-    #filename = "board002Acycle0099_rgbnoise.png"
 
-    #filename = "board0035cycle0077_rgbnoise.png"
-    filename = "board0035cycle0099_rgbnoise.png"
+    #filename  = "board002Acycle0059_rgb.png" 
+    #filename  = "board002Acycle0079_rgb.png" 
+    #filename  = "board002Acycle0093_rgb.png" 
 
-    #filename = "board0088cycle0074_rgbnoise.png"
-    #filename = "board0088cycle0040_rgbnoise.png"
-    #filename = "board0088cycle0061_rgbnoise.png"
+    #filename  = "board0088cycle0076_rgb.png" 
+    #filename  = "board0088cycle0008_rgb.png" 
 
-    ## outliers
-    #filename = "board0040cycle0071_rgbnoise_rgb.png"
-    
+    #filename  = "board0035cycle0012_rgb.png" 
+    filename  = "board0035cycle0035_rgb.png" 
+
     filesize = os.path.getsize(filename) # get the file size
     
     ## for board 002A
     #client_socket.send("Authentication request from board002A".encode("utf-8"))
     
-    ## for board 0035
-    client_socket.send("Authentication request from board0035".encode("utf-8"))
-
     ## for board 0088
     #client_socket.send("Authentication request from board0088".encode("utf-8"))
+
+    ## for board 0035
+    client_socket.send("Authentication request from board0035".encode("utf-8"))
 
     ## outliers
     #client_socket.send("Authentication request from board001B".encode("utf-8"))
     #client_socket.send("Authentication request from board003A".encode("utf-8"))
+
     #client_socket.send("Authentication request from board0017".encode("utf-8"))
 
 
