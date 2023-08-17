@@ -1,2 +1,5 @@
-# SRAM-PUF-AUTH
-* this sectionn works with the authentication part
+# Authentication module
+
+This module interacts with the ML model and performs the authentication
+
+
