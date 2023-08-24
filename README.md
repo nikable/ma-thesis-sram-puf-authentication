@@ -16,7 +16,7 @@
 *  Dataset uploaded in the above GitLab repo is in the [Git LFS](https://git-lfs.com/) format, so it would take a significant amount of time to pull from the repository. Ensure you have pulled the complete dataset (containing responses of 143 boards.
 
 2. Pre-process the raw dataset:
-* This includes generating images from the raw SRAM data, and corrupting the dataset, adding noise to the dataset as and when required.
+*  This includes generating images from the raw SRAM data, and corrupting the dataset, adding noise to the dataset as and when required.
 
 3. Model training:
 *  MobileNetV2 and EfficientNet-Lite model training with the intact, corrupted, and noisy dataset (pre-processed in the above module)
