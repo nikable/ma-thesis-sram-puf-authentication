@@ -1,29 +1,29 @@
+## based on @reshmi's work https://github.com/reshmisuragani/Master-Thesis-ML-SRAM_PUF
 import numpy as np
 from skimage.util import random_noise
 import cv2
 import glob,os
 from PIL import Image
-
 import time
 
+## source (intact images) and destination (to store noisy images) folders 
+path = '/home/stark/thesis/sram/dataxmc/tflite/intact'
+dest_path = '/home/stark/thesis/sram/dataxmc/tflite/noisy'
+
+## start tracking execution time
 start = time.time()
 
-#path = r'D:\Uni-passau\thesis-smalldataset\gaussian-50\train'
-#dest_path = r"D:\Uni-passau\thesis-smalldataset\gaussian-50\train"
-path = '/home/stark/thesis/sram/dataxmc/random/bin-to-image-50'
-dest_path = '/home/stark/thesis/sram/dataxmc/random/noisy-50'
-
-
-# list all folders in a directary
+# fetching source folders having board response images
 folders = []
 for filename in os.listdir(path):
     if filename.startswith('board'):
         folders.append(filename)
 
-# creating target folders
+# creating target folders with same name as source folders
 for folder in folders:
     os.mkdir(os.path.join(dest_path,folder))
-    
+
+## adding noise to images
 def file_to_image(folder):
   name =[]
   for file in os.listdir(os.path.join(path,folder)):
@@ -36,8 +36,6 @@ def file_to_image(folder):
         image = Image.fromarray(noise_img)
         new_filename = file.split('.png')[0] + 'noise.png'
         image.save(os.path.join(dest_path,folder,new_filename))
-        
-        
     
 for folder in folders:
     images = file_to_image(folder)

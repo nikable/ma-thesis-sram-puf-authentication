@@ -1,3 +1,4 @@
+### based on @reshmi's work https://github.com/reshmisuragani/Master-Thesis-ML-SRAM_PUF
 import os,glob
 import random
 from itertools import cycle,islice
@@ -5,27 +6,28 @@ from PIL import Image
 import numpy as np      
 import numpy
 import cv2
-# path = r'E:\thesis-smalldataset\raw_dataset-split\test'
-# dest_path = r"E:\thesis-smalldataset\corrupted-2\test"
 import time
 
+## source dataset folder (containing raw sram response folders)
+path = '/home/stark/thesis/sram/dataxmc/tflite/dataset/corrupted-dataset/raw-3'
+
+## corrupted 20%
+dest_path = '/home/stark/thesis/sram/dataxmc/tflite/dataset/corrupted-dataset/corrupted'
+
+## start timer
 start = time.time()
 
-path = '/home/stark/thesis/sram/dataxmc/random/raw-3'
-#dest_path = '/home/stark/thesis/sram/dataxmc/random/corrupted-50'
-
-## corrupted 15%
-dest_path = '/home/stark/thesis/sram/dataxmc/random/corrupted-10'
-
-
+## fetching source raw responses from folder (starting with name board)
 folders = []
 for filename in os.listdir(path):
     if filename.startswith('board'):
         folders.append(filename)
 
+## creating target folders to save corrupted images with same name as source folders
 for folder in folders:
     os.mkdir(os.path.join(dest_path,folder))
-    
+
+## generating corrupted images from each raw response file
 def file_to_image(folder):
   name =[]
   for file in os.listdir(os.path.join(path,folder)):
@@ -33,10 +35,13 @@ def file_to_image(folder):
   for file in name:
     if file.startswith('board'):
         f = open(os.path.join(path,folder,file), "rb")
-        s =f.read()
+        s = f.read()
         binvalue = list(bytearray(s))
-        n  =int(len(binvalue)*0.10) # percentage of bits to be corrupted (25% ~ 0.25)
-        binvalue[-n:] =  [0] * n 
+        n  = int(len(binvalue)*0.20) # percentage of bits to be corrupted
+        binvalue[-n:] = [0] * n # corrupt from bottom
+        # binvalue[:n] = [0] * n # corruot from top if required
+        
+        # hex to binary conversion and image generation
         new=[]
         for i in binvalue:
             new.append(bin(int(i))[2:].zfill(8))
@@ -48,12 +53,10 @@ def file_to_image(folder):
         image = Image.fromarray((data_2_img * 255).astype('uint8'), mode ='L')
         new_filename = file.split(' ')[0] + '.png'
         image.save(os.path.join(dest_path,folder,new_filename))
-        
-        
-    
+
+
 for folder in folders:
     images = file_to_image(folder)
-
 
 
 end = time.time()
