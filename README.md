@@ -12,7 +12,7 @@
 
 1. Collect the raw dataset:
 *  This dataset is provided by TUM and can be found at their [GitLab repo](https://gitlab.lrz.de/tueisec/PQAS/-/tree/master/matlab/datasets/SRAMxmc16/data).
-*  It contains the raw SRAM responses collected from 143 XMC microcontroller boards. Each board is sampled 101 times and exported in a <>".bin" format. Therefore, each board contains 101 responses. 
+*  It contains the raw SRAM responses collected from 143 XMC microcontroller boards. Each board is sampled 101 times and exported in a <em>".bin"</em> format. Therefore, each board contains 101 responses. 
 *  Dataset uploaded in the above GitLab repo is in the [Git LFS](https://git-lfs.com/) format, so it would take a significant amount of time to pull from the repository. Ensure you have pulled the complete dataset (containing responses of 143 boards.
 
 2. Pre-process the raw dataset:
