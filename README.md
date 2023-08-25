@@ -1,6 +1,6 @@
 # SRAM-PUF-Authentication
 
-## This codebase is organized into five modules (feature branches):
+### This codebase is organized into five modules (feature branches):
 
 * feature/pre-processing: to pre-process the raw dataset before training it with machine learning models
 * fearure/model-training: model training with the mobilenetv2 and the efficient-net lite using pre-processed dataset
@@ -17,10 +17,10 @@
 
 2. Pre-process the raw dataset:
 *  This includes generating images from the raw SRAM data, and corrupting the dataset, adding noise to the dataset as and when required.
+*  Additionally, it also contains a submodule to convert Grayscale images to RGB (requirement from TFLite Model maker; as of now) for model training and execution.
 
 3. Model training:
-*  MobileNetV2 and EfficientNet-Lite model training with the intact, corrupted, and noisy dataset (pre-processed in the above module)
-*  Additionally, it also contains a module to convert Grayscale images to RGB (requirement from TFLite Model maker; as of now) for model training and execution
+*  MobileNetV2 and EfficientNet-Lite model training with the intact, corrupted, and noisy dataset (pre-processed in the above module).
 
 4. Authenticator and Sender
 *  Transfering pre-trained models (above module) to the Authenticator (possibly a Raspberry Pi device).
