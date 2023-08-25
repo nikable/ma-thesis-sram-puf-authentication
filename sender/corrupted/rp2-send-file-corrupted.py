@@ -21,11 +21,11 @@ def client_program():
     #filename  = "board002Acycle0079_rgb.png" 
     #filename  = "board002Acycle0093_rgb.png" 
 
-    #filename  = "board0088cycle0076_rgb.png" 
+    filename  = "board0088cycle0076_rgb.png" 
     #filename  = "board0088cycle0008_rgb.png" 
 
     #filename  = "board0035cycle0012_rgb.png" 
-    filename  = "board0035cycle0035_rgb.png" 
+    #filename  = "board0035cycle0035_rgb.png" 
 
     filesize = os.path.getsize(filename) # get the file size
     
@@ -33,10 +33,10 @@ def client_program():
     #client_socket.send("Authentication request from board002A".encode("utf-8"))
     
     ## for board 0088
-    #client_socket.send("Authentication request from board0088".encode("utf-8"))
+    client_socket.send("Authentication request from board0088".encode("utf-8"))
 
     ## for board 0035
-    client_socket.send("Authentication request from board0035".encode("utf-8"))
+    #client_socket.send("Authentication request from board0035".encode("utf-8"))
 
     ## outliers
     #client_socket.send("Authentication request from board001B".encode("utf-8"))

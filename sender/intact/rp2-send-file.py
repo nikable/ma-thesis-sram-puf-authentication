@@ -20,25 +20,23 @@ def client_program():
     ## outliers
     #filename = "board001Bcycle0058_rgb.png"
     #filename = "board003Acycle0050_rgb.png"
-    
     #filename = "board0017cycle0080_rgb.png"
     
-    ## example boards from which model is trained on colab
+    ## example board images from which model is trained on colab
     #filename = "board002Acycle0064_rgb.png"
     #filename = "board003Dcycle0055_rgb.png"
     #filename = "board000Bcycle0007_rgb.png"
 
 
-    ## local boards
+    ## example bord images from which model is trained locally
     
-    #filename = "board002Acycle0064_rgb.png"
+    filename = "board002Acycle0064_rgb.png"
     #filename = "board002Acycle0017_rgb.png"
     #filename = "board002Acycle0087_rgb.png"
     
     #filename = "board0035cycle0002_rgb.png"
     #filename = "board0035cycle0095_rgb.png"
     #filename = "board0035cycle0065_rgb.png"
-
 
     #filename = "board0088cycle0005_rgb.png"
     #filename = "board0088cycle0049_rgb.png"
@@ -49,14 +47,11 @@ def client_program():
     #filename = "board0088cycle0063_rgb.png"
 
 
-    
-
-
     filesize = os.path.getsize(filename) # get the file size
     
     ## trained on google-colab
     ## for board 002A
-    #client_socket.send("Authentication request from board002A".encode("utf-8"))
+    client_socket.send("Authentication request from board002A".encode("utf-8"))
     
     ## for board 003D
     #client_socket.send("Authentication request from board003D".encode("utf-8"))
@@ -72,8 +67,7 @@ def client_program():
     #client_socket.send("Authentication request from board0035".encode("utf-8"))
 
     ## for board 0088
-    client_socket.send("Authentication request from board0088".encode("utf-8"))
-
+    #client_socket.send("Authentication request from board0088".encode("utf-8"))
 
 
     ## outliers
@@ -95,7 +89,6 @@ def client_program():
     try:
             
         print("Sending image:", filename)
- 
         
         # send the filename and filesize
         client_socket.send(f"{filename}{SEPARATOR}{filesize}".encode())
@@ -114,7 +107,8 @@ def client_program():
     except BrokenPipeError:
         print("Connection closed by remote server.. try again!")
 
-    ### todo ack from server
+    ### ack from server
+    #time.sleep(2)
     #auth_msg = client_socket.recv(BUFFER_SIZE).decode("utf-8")
     #print("from server:",auth_msg)
     #time.sleep(5)

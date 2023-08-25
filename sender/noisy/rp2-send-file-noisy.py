@@ -80,7 +80,7 @@ def client_program():
     except BrokenPipeError:
         print("Connection closed by remote server.. try again!")
 
-    ### todo ack from server
+    ### ack from server
     #auth_msg = client_socket.recv(BUFFER_SIZE).decode("utf-8")
     #print("from server:",auth_msg)
     #time.sleep(5)
