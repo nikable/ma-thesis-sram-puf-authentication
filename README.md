@@ -22,12 +22,12 @@
 3. Model training:
 *  MobileNetV2 and EfficientNet-Lite model training with the intact, corrupted, and noisy dataset (pre-processed in the above module).
 
-4. Authenticator and Sender
+4. Authenticator and Sender:
 *  Transfering pre-trained models (above module) to the Authenticator (possibly a Raspberry Pi device).
 *  Transferring pre-processed images to another device, termed as a sender.
 *  Authenticator can then receive images and send them to the pre-trained model for classification.
 
-5. Generating responses from Arduino Uno
+5. Generating responses from Arduino Uno:
 *  Burning the bootloader on the Arduino Uno to reset the board.
 *  Generate SRAM responses and view them on a serial output.
 
