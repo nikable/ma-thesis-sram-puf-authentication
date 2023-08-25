@@ -32,7 +32,7 @@ def server_program():
     parser.add_argument(
     '-d',
     '--devices',
-    default='../mobilenet/labels.txt',
+    default='../efficientnet/labels.txt',
     help='list of enrolled devices')
     args = parser.parse_args()
     
@@ -81,24 +81,26 @@ def server_program():
         print("File received. model being executed..")
         time.sleep(2)
 
-        # calling mobilenet model for classification
-        model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/mobilenet/noisy/model.tflite"
+        # calling mobilenet model (trained on colab) for classification
+        #model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/mobilenet/local-intact/model.tflite"
+
+        # calling mobilenet model (locally trained) for classification
+        model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/mobilenet/local-intact/model.tflite"
 
         image = filename
         score, label = mi.classify_image(model,image)  
 
         print("Image label detected:", label , "with confidence:", score*100, "%")
         
-        if(score*100 > 85 and label.lower() == board.lower()):
-            print("Predicted label by model from board image is correct.. authentication successful :)")
+        if(score*100 > 90 and label.lower() == board.lower()):
+            print("Predicted label by model from board image is correct.. authentication successful :) ")
             conn.send("Device authenticated".encode(ENCODING))
 
-        elif(score*100 < 85 and label.lower() == board.lower()):
+        elif(score*100 < 90 and label.lower() == board.lower()):
             print("Predicted label has low confidence score... authentication not successful!!")
 
         else:
-            print("Board name and predicted image label mismatch...authentication not successful!!")
-            conn.send("Device not authenticated".encode(ENCODING))
+            print("Board name and predicted image label mismatch...authentication not successful!")
         
 
         conn.close()  # close the connection

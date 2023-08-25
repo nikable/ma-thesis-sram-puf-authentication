@@ -16,11 +16,11 @@ def classify_image(model_path,image):
     
     # Run inference
     image = vision.TensorImage.create_from_file(image)
-    
     classification_result = classifier.classify(image)
     #print(dir(classification_result))
     #print(classification_result.classifications[0].categories[0].score)
     
+    # get the first predicted class from the possible predicted classes
     score = classification_result.classifications[0].categories[0].score
     label = classification_result.classifications[0].categories[0].category_name
     
