@@ -3,7 +3,7 @@ import os
 from scipy.spatial.distance import hamming
 
 ## load initial response
-with open("/home/stark/Arduino/values/arduino_uno_reading_12.txt") as file:
+with open("/home/stark/Arduino/values/arduino_uno_reading_1.txt") as file:
     lines = [line.strip() for line in file]
     ## split memory response for each byte
     split = [words for segments in lines for words in segments.split()] 
@@ -20,7 +20,7 @@ print("Received PUF response 1 lenth: " + str(len(binary_list)) + "bytes")
 #print(len(int_list))
 
 ## load another response
-with open("/home/stark/Arduino/values/arduino_uno_reading.txt") as file:
+with open("/home/stark/Arduino/values/arduino_uno_reading_2.txt") as file:
     lines2 = [line.strip() for line in file]
     split2 = [words2 for segments2 in lines2 for words2 in segments2.split()]
 

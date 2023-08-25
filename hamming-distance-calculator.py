@@ -10,6 +10,7 @@ from scipy.spatial.distance import hamming
 scale = 16
 binary_list  = []
 binary_list2 = []
+
 ## for csv
 init_response_list = []
 second_response_list = []
@@ -17,7 +18,7 @@ init_response_size = []
 second_response_size = []
 intra_hd_list = []
 
-## response folder location
+## fetch responses for distance calculation
 folder_path = "/home/stark/thesis/sram/arduino/"  
 ## list of files in the folder
 file_names = os.listdir(folder_path)
@@ -98,4 +99,4 @@ df = pd.DataFrame(dict)
 df.index = df.index + 1
      
 # saving the dataframe
-df.to_csv('/home/stark/thesis/sram/csv/test7.csv')
+df.to_csv('/home/stark/thesis/sram/csv/test.csv')

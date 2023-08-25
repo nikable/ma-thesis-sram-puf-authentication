@@ -1,10 +1,10 @@
-// from @joop_broking 
-
+// from @joop_broking
 int main() {
+
   UCSR0B = (1 << TXEN0);                  //Enable the serial output
   UBRR0L = 16;                            //Set the baud rate to 57600bps
 
-
+  
   memory_dump();                          //Execute to the memory_dump subroutine
 
   while (1);                              //Stay in this loop
@@ -32,7 +32,8 @@ void memory_dump() {
     UDR0 = 0x20;
     while ( !( UCSR0A & (1 << UDRE0)) );
 
-    if (new_line == 64) {
+    // 16 hex memory values on each line of the serial output
+    if (new_line == 16) {
       new_line = 0;
       UDR0 = 0x0A;
       while ( !( UCSR0A & (1 << UDRE0)) );
