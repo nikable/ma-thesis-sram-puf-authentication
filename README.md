@@ -8,7 +8,7 @@ This module focuses on training efficientnet-lite and mobilenet models with inta
 *  Since our data set is small to start with (3 boards; 303 images), this is doable on the local system.
 
 ## Training on the local system
-*  This can be done by setting up a [miniconda environment](https://docs.conda.io/en/latest/miniconda.html) depending on your local system operating system. 
+*  This can be done by setting up a [miniconda environment](https://docs.conda.io/en/latest/miniconda.html) depending on your computer's operating system. 
 *  A python virtual environment can be created with the version 3.9 to make the setup compatible with the TFLite Model Maker. 
 *  Make sure to lower the numpy version as well (<1.24) to make it with the TFLite Model maker [more details](https://discuss.tensorflow.org/t/tensorflow-lite-model-maker-import-errors/14896).
 
