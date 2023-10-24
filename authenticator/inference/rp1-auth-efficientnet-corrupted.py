@@ -81,7 +81,10 @@ def server_program():
         time.sleep(2)
 
         # calling efficientnet_lite model for classification
-        model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/efficientnet/corrupted/bottom20/model.tflite"
+        #model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/efficientnet/corrupted/bottom20/model.tflite"
+
+        # calling efficientnet_lite model (with 5 boards) for classification
+        model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/efficientnet/corrupted/5-boards"
 
         image = filename
         score, label = mi.classify_image(model,image)  

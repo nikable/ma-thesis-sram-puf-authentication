@@ -84,6 +84,9 @@ def server_program():
         # calling efficientnet_lite model for classification
         model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/efficientnet/noisy/model.tflite"
 
+        # calling efficientnet_lite model (with 5 boards) for classification
+        model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/efficientnet/noisy/5-boards/model.tflite"
+
         image = filename
         score, label = mi.classify_image(model,image)  
 

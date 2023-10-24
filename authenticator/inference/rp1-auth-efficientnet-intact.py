@@ -85,7 +85,10 @@ def server_program():
         #model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/efficientnet/model.tflite"
 
         # calling efficientnet_lite model (locally trained) for classification
-        model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/efficientnet/local-intact/model.tflite"
+        # model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/efficientnet/local-intact/model.tflite"
+
+        # calling efficientnet_lite model (locally trained with 5 boards) for classification
+        model = "/home/pi1/tflite/SRAM-PUF-AUTH/authenticator/efficientnet/local-intact/5-boards/model.tflite"
 
         image = filename
         score, label = mi.classify_image(model,image)  
