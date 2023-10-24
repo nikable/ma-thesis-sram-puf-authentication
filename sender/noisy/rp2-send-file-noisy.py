@@ -23,11 +23,14 @@ def client_program():
     #filename = "board002Acycle0099_rgbnoise.png"
 
     #filename = "board0035cycle0077_rgbnoise.png"
-    filename = "board0035cycle0099_rgbnoise.png"
+    #filename = "board0035cycle0099_rgbnoise.png"
 
     #filename = "board0088cycle0074_rgbnoise.png"
     #filename = "board0088cycle0040_rgbnoise.png"
     #filename = "board0088cycle0061_rgbnoise.png"
+    
+    #filename = "board0004cycle0020_rgbnoise.png"
+    filename = "board000Bcycle0047_rgbnoise.png"
 
     ## outliers
     #filename = "board0040cycle0071_rgbnoise_rgb.png"
@@ -38,10 +41,14 @@ def client_program():
     #client_socket.send("Authentication request from board002A".encode("utf-8"))
     
     ## for board 0035
-    client_socket.send("Authentication request from board0035".encode("utf-8"))
+    #client_socket.send("Authentication request from board0035".encode("utf-8"))
 
     ## for board 0088
     #client_socket.send("Authentication request from board0088".encode("utf-8"))
+
+    
+    ## for board 0004
+    client_socket.send("Authentication request from board000B".encode("utf-8"))
 
     ## outliers
     #client_socket.send("Authentication request from board001B".encode("utf-8"))

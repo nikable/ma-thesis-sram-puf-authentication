@@ -30,7 +30,7 @@ def client_program():
 
     ## example bord images from which model is trained locally
     
-    filename = "board002Acycle0064_rgb.png"
+    #filename = "board002Acycle0064_rgb.png"
     #filename = "board002Acycle0017_rgb.png"
     #filename = "board002Acycle0087_rgb.png"
     
@@ -46,12 +46,47 @@ def client_program():
     #filename = "board0088cycle0049_rgb.png"
     #filename = "board0088cycle0063_rgb.png"
 
+    #filename = "board0004cycle0002_rgb.png"
+    #filename = "board0004cycle0010_rgb.png"
+    #filename = "board0004cycle0015_rgb.png"
+    #filename = "board0004cycle0020_rgb.png"
+    #filename = "board0004cycle0034_rgb.png"
+    #filename = "board0004cycle0067_rgb.png"
+    #filename = "board0004cycle0093_rgb.png"
+
+    #filename = "board000Bcycle0002_rgb.png"
+    #filename = "board000Bcycle0007_rgb.png"
+    #filename = "board000Bcycle0015_rgb.png"
+    #filename = "board000Bcycle0020_rgb.png"
+    #filename = "board000Bcycle0034_rgb.png"
+    #filename = "board000Bcycle0093_rgb.png"
+    
+
+    #filename = "board0052cycle0002_rgb.png"
+    #filename = "board0052cycle0034_rgb.png"
+    #filename = "board0052cycle0047_rgb.png"
+    #filename = "board0052cycle0020_rgb.png"
+    #filename = "board0052cycle0058_rgb.png"
+
+
+    #filename = "board0074cycle0002_rgb.png"
+    #filename = "board0074cycle0007_rgb.png"
+    #filename = "board0074cycle0015_rgb.png"
+    #filename = "board0074cycle0020_rgb.png"
+    #filename = "board0074cycle0034_rgb.png"
+
+    #filename = "board0083cycle0002_rgb.png"
+    #filename = "board0083cycle0007_rgb.png"
+    #filename = "board0083cycle0015_rgb.png"
+    filename = "board0083cycle0020_rgb.png"
+    #filename = "board0083cycle0034_rgb.png"
+
 
     filesize = os.path.getsize(filename) # get the file size
     
     ## trained on google-colab
     ## for board 002A
-    client_socket.send("Authentication request from board002A".encode("utf-8"))
+    #client_socket.send("Authentication request from board002A".encode("utf-8"))
     
     ## for board 003D
     #client_socket.send("Authentication request from board003D".encode("utf-8"))
@@ -69,6 +104,18 @@ def client_program():
     ## for board 0088
     #client_socket.send("Authentication request from board0088".encode("utf-8"))
 
+
+    ## for board 0004
+    #client_socket.send("Authentication request from board0004".encode("utf-8"))
+
+    ## for board 0052
+    #client_socket.send("Authentication request from board0052".encode("utf-8"))
+
+    ## for board 0074
+    #client_socket.send("Authentication request from board0074".encode("utf-8"))
+    
+    ## for board 0083
+    client_socket.send("Authentication request from board0083".encode("utf-8"))
 
     ## outliers
     #client_socket.send("Authentication request from board001B".encode("utf-8"))
